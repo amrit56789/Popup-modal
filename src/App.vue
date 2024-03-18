@@ -4,6 +4,10 @@
     <button @click="focusInput">Focus</button>
     <button @click="showModal = true">Show Popup Modal</button>
     <Modal v-if="showModal" :title="modalTitle" :content="modalContent" :theme="theme" @close="showModal = false">
+        <template v-slot:links>
+            <a href="https://www.myntra.com/">Shop Now</a>
+            <a href="https://www.myntra.com/tac#:~:text=Any%20queries%2Fcomplaints%20or%20dispute,customer%20care%20%40%20080%206156%201999.">Contact Us</a>
+        </template>
     </Modal>
 </div>
 </template>
@@ -14,7 +18,7 @@ import Modal from './components/Modal.vue';
 export default {
     name: 'App',
     components: {
-      Modal
+        Modal
     },
     data() {
         return {
@@ -68,7 +72,7 @@ input[type="text"] {
 
 a {
     display: inline-block;
-    background-color: #3498db;
+    background-color: #5f849c;
     color: white;
     padding: 10px 20px;
     margin: 5px;
