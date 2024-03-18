@@ -2,13 +2,16 @@
 <div id="app">
     <input ref="inputField" type="text">
     <button @click="focusInput">Focus</button>
-    <button @click="showModal = true">Show Popup Modal</button>
+    <button @click="openModal('light')">Show Popup Modal</button>
     <Modal v-if="showModal" :title="modalTitle" :content="modalContent" :theme="theme" @close="showModal = false">
         <template v-slot:links>
-            <a href="https://www.myntra.com/">Shop Now</a>
-            <a href="https://www.myntra.com/tac#:~:text=Any%20queries%2Fcomplaints%20or%20dispute,customer%20care%20%40%20080%206156%201999.">Contact Us</a>
+            <a href="https://www.myntra.com/" :style="{ backgroundColor: themeLinkColor }">Shop Now</a>
+            <a href="https://www.myntra.com/tac#:~:text=Any%20queries%2Fcomplaints%20or%20dispute,customer%20care%20%40%20080%206156%201999." :style="{ backgroundColor: themeLinkColor }">Contact Us</a>
         </template>
     </Modal>
+    <button @click="openModal('sale')" class="sale-btn">
+        Sale
+    </button>
 </div>
 </template>
 
@@ -24,15 +27,23 @@ export default {
         return {
             showModal: false,
             modalTitle: 'Sign up for the Giveaway!',
-            modalContent: 'Grab your ninja swag for half price!',
-            theme: 'light'
+            modalContent: 'Grab your ninja swag for half price!'
         };
+    },
+    computed: {
+        themeLinkColor() {
+            return this.theme === 'sale' ? '#3498db' : '#5f849c';
+        }
     },
     methods: {
         focusInput() {
             this.$refs.inputField.focus();
+        },
+        openModal(theme) {
+            this.theme = theme;
+            this.showModal = true;
         }
-    }
+    },
 };
 </script>
 
@@ -83,5 +94,9 @@ a {
 
 a:hover {
     background-color: #2980b9;
+}
+
+.sale-btn {
+    background-color: #3498db;
 }
 </style>
